@@ -134,6 +134,18 @@ Date.prototype.age = function(){
 	return Math.round( (  (new Date()).getTime() - this.getTime() ) * (1/365) * (1/MSPERDAY) ) ; 
 }
 
+Date.prototype.topOfHour= function(){
+	return new Date(this.getTime() - ( 60*1000*this.getMinutes() + 1000*this.getSeconds() + this.getMilliseconds() ));
+}
+
+Date.prototype.topOfDay = function(){
+	var d=(new Date(this.topOfHour()));
+	return new Date(d.getTime()-(60*60*1000*d.getHours()));
+}
+Date.prototype.nextDay = function(){
+	return new Date(this.topOfDay().getTime()+MSPERDAY);
+}
+
 Date.prototype.getNumOfDaysThisMonth = function(){
 	var d = this.daysInMthArray[1+this.getMonth()];
 	if (d==28 && ( this.getYear()%4 )==0 ) d==29;
