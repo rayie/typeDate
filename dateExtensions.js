@@ -146,6 +146,13 @@ Date.prototype.getMonthStartEnd = function(){ //returns a date range with 1st an
 	return ( new DateRange( stDt, endDt) );
 }
 
+Date.prototype.getWeekStartEnd= function(){ //returns a date range with 1st and last day of month
+	var stDt = new Date( this.getFullYear(), this.getMonth(), (this.getDate()-this.getDay()));
+	var endDt = new Date( this.getFullYear(), this.getMonth(), (this.getDate()-this.getDay())+7);
+	return ( new DateRange( stDt, endDt) );
+}
+
+
 Date.prototype.getSameDayNextMonth = function(){
 	var dayOfMonth = this.getDate();
 	var mth = this.getMonth();
@@ -162,6 +169,7 @@ Date.prototype.getSameDayNextMonth = function(){
 Date.prototype.addMinutes = function(min){
 	return new Date(this.getTime() + (min * 60000));
 }
+
 
 
 
